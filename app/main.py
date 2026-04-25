@@ -81,6 +81,12 @@ def create_app() -> FastAPI:
             "version": settings.APP_VERSION,
         }
 
+    # ── Root ─────────────────────────────────────────────────────────────
+    @app.get("/", include_in_schema=False)
+    async def root():
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/docs")
+
     return app
 
 
