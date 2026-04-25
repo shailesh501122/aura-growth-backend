@@ -132,6 +132,10 @@ async def google_oauth_callback(
     5. Return JWT tokens
     """
     async with httpx.AsyncClient() as client:
+        # Diagnostic logging (Safe: doesn't log the secret itself)
+        if not settings.GOOGLE_CLIENT_SECRET:
+            logger.error("❌ GOOGLE_CLIENT_SECRET is missing or empty in environment variables!")
+        
         # Exchange authorization code for tokens
         token_response = await client.post(
             GOOGLE_TOKEN_URL,
