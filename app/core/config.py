@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
 
     # ── Database ─────────────────────────────────────────────────────────
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/auragrowth"
+    DATABASE_URL: str = "postgresql+asyncpg://linkshare_h09n_user:qJ73O9KqtxClUjBji3prbzXzkjGyQRIJ@dpg-d7mebq9j2pic73caljng-a/linkshare_h09n"
 
     # ── JWT ──────────────────────────────────────────────────────────────
     SECRET_KEY: str = "change-me-to-a-very-long-random-secret-key-in-production"
