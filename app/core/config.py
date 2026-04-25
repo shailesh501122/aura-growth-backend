@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ── Google OAuth ─────────────────────────────────────────────────────
-    GOOGLE_CLIENT_ID: str = ""
+    GOOGLE_CLIENT_ID: str = "281050352510-h4pgsv9vba7p87g864kbbh9kfarp838s.apps.googleusercontent.com"
     GOOGLE_CLIENT_SECRET: str = ""
     GOOGLE_REDIRECT_URI: str = "https://aura-growth-backend.onrender.com/api/v1/auth/google/callback"
 
