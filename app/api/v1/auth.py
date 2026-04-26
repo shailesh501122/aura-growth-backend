@@ -60,8 +60,8 @@ async def google_callback(
     tokens = await auth_service.google_oauth_callback(db=db, code=code, background_tasks=background_tasks)
     
     # In production, we redirect to the frontend URL
-    frontend_url = "https://aura-growth.onrender.com/dashboard"
-    redirect_url = f"{frontend_url}?access_token={tokens.access_token}&refresh_token={tokens.refresh_token}"
+    frontend_url = "https://aura-growth.onrender.com"
+    redirect_url = f"{frontend_url}/#/dashboard?access_token={tokens.access_token}&refresh_token={tokens.refresh_token}"
     
     return RedirectResponse(url=redirect_url)
 
