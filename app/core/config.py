@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
     ENVIRONMENT: str = "production"
-    ALLOWED_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+    ALLOWED_ORIGINS: str = "https://aura-growth.onrender.com,http://localhost:5173"
 
     # ── Database ─────────────────────────────────────────────────────────
     DATABASE_URL: str = "postgresql+asyncpg://linkshare_h09n_user:qJ73O9KqtxClUjBji3prbzXzkjGyQRIJ@dpg-d7mebq9j2pic73caljng-a/linkshare_h09n"

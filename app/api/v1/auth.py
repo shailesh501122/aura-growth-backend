@@ -49,16 +49,21 @@ async def google_login(state: str | None = Query(None)):
     return RedirectResponse(url=url)
 
 
-@router.get("/google/callback", response_model=AuthResponse)
+@router.get("/google/callback")
 async def google_callback(
     code: str,
     background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     state: str | None = Query(None),
 ):
-    """Handle Google OAuth2 callback. Creates account if first login."""
+    """Handle Google OAuth2 callback. Redirects to frontend dashboard with tokens."""
     tokens = await auth_service.google_oauth_callback(db=db, code=code, background_tasks=background_tasks)
-    return AuthResponse(message="Google login successful", data=tokens)
+    
+    # In production, we redirect to the frontend URL
+    frontend_url = "https://aura-growth.onrender.com/dashboard"
+    redirect_url = f"{frontend_url}?access_token={tokens.access_token}&refresh_token={tokens.refresh_token}"
+    
+    return RedirectResponse(url=redirect_url)
 
 
 @router.get("/me", response_model=UserResponse)
