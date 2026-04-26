@@ -97,6 +97,10 @@ async def send_email(
     Returns True on success, False on failure.
     """
     try:
+        if not settings.SMTP_USER or not settings.SMTP_PASSWORD:
+            logger.error("❌ SMTP configuration is missing (SMTP_USER/SMTP_PASSWORD). Email will not be sent.")
+            return False
+            
         message = MIMEMultipart("alternative")
         message["From"] = f"{settings.SMTP_FROM_NAME} <{settings.SMTP_FROM_EMAIL}>"
         message["To"] = to_email
