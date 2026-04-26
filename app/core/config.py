@@ -51,12 +51,18 @@ class Settings(BaseSettings):
     SMTP_FROM_EMAIL: str = ""
     SMTP_USE_TLS: bool = True
 
+    # ── AI / Gemini ──────────────────────────────────────────────────────
+    GEMINI_API_KEY: str = ""
+
     # ── Rate Limiting ────────────────────────────────────────────────────
     IG_DM_RATE_LIMIT_PER_DAY: int = 200
 
     # ── Pagination ───────────────────────────────────────────────────────
     DEFAULT_PAGE_SIZE: int = 20
     MAX_PAGE_SIZE: int = 100
+
+    # ── Request Logging ──────────────────────────────────────────────────
+    ENABLE_REQUEST_LOGGING: bool = True
 
     @property
     def cors_origins(self) -> list[str]:

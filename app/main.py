@@ -16,6 +16,7 @@ from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.db.session import engine
 from app.services.subscription_service import seed_default_plans
+from app.services.admin_service import seed_system_defaults
 from app.db.session import async_session_factory
 
 logger = logging.getLogger("auragrowth")
@@ -34,6 +35,14 @@ async def lifespan(app: FastAPI):
             await session.commit()
         except Exception as e:
             logger.warning(f"Plan seeding skipped: {e}")
+
+    # Seed system settings and feature flags
+    async with async_session_factory() as session:
+        try:
+            await seed_system_defaults(session)
+            await session.commit()
+        except Exception as e:
+            logger.warning(f"System defaults seeding skipped: {e}")
 
     yield
 
@@ -65,6 +74,11 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # ── Request Logging Middleware ───────────────────────────────────────
+    if settings.ENABLE_REQUEST_LOGGING:
+        from app.core.middleware import RequestLoggingMiddleware
+        app.add_middleware(RequestLoggingMiddleware)
 
     # ── Exception Handlers ───────────────────────────────────────────────
     register_exception_handlers(app)

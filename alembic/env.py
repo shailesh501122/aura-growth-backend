@@ -13,13 +13,7 @@ from app.core.config import settings
 from app.db.base import Base
 
 # Import all models so Alembic can detect them
-from app.models.user import User  # noqa: F401
-from app.models.gmail_account import GmailAccount  # noqa: F401
-from app.models.instagram_account import InstagramAccount  # noqa: F401
-from app.models.automation import Automation, AutomationLog, AutomationRule  # noqa: F401
-from app.models.bio_page import BioPage, BioLink  # noqa: F401
-from app.models.subscription import Plan, UserSubscription, UsageTracking  # noqa: F401
-from app.models.analytics import ClickEvent, EmailLog, DmLog  # noqa: F401
+import app.models  # noqa: F401 – triggers all model imports from __init__.py
 
 config = context.config
 
